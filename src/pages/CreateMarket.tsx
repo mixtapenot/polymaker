@@ -76,7 +76,11 @@ export default function CreateMarket() {
       navigate('/');
     } catch (err: any) {
       console.error('Error creating market:', err);
-      setError(err.message || 'Failed to create market');
+      if (err.message?.includes('Could not find the table')) {
+        setError('Database table not found. Please run the SQL setup script in your Supabase dashboard.');
+      } else {
+        setError(err.message || 'Failed to create market');
+      }
     } finally {
       setLoading(false);
     }
