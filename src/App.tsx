@@ -8,7 +8,6 @@ import { AuthProvider } from '@/context/AuthContext';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import CreateMarket from '@/pages/CreateMarket';
-import AuthCallback from '@/pages/AuthCallback';
 
 export default function App() {
   return (
@@ -18,7 +17,6 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<CreateMarket />} />
-            <Route path="/auth/callback" element={<AuthCallback />} />
           </Route>
         </Routes>
       </AuthProvider>
