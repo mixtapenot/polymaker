@@ -26,7 +26,7 @@ export default function Home() {
         .select(`
           *,
           profiles:creator_id (full_name, avatar_url),
-          market_options (name)
+          market_options (id, name)
         `)
         .order('score', { ascending: false });
 
@@ -142,14 +142,6 @@ export default function Home() {
             Suggest new markets, vote on ideas, and help curate the future of prediction.
             The best ideas rise to the top.
           </p>
-          <Button 
-            variant="secondary" 
-            size="lg" 
-            onClick={() => user ? window.location.href = '/create' : signInWithGoogle()}
-            className="font-semibold"
-          >
-            Suggest a Market
-          </Button>
         </div>
         <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-white/10 to-transparent pointer-events-none" />
         <div className="absolute -right-10 -bottom-20 h-64 w-64 bg-indigo-500 rounded-full blur-3xl opacity-50" />
