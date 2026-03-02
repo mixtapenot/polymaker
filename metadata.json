@@ -1,0 +1,5 @@
+{
+  "name": "MarketMind",
+  "description": "A platform for suggesting and voting on prediction market ideas.",
+  "requestFramePermissions": []
+}
