@@ -78,6 +78,24 @@ export default function CreateMarket() {
       console.error('Error creating market:', err);
       if (err.message?.includes('Could not find the table')) {
         setError('Database table not found. Please run the SQL setup script in your Supabase dashboard.');
+      } else if (err.message?.includes('violates foreign key constraint "market_ideas_creator_id_fkey"')) {
+        // Attempt to fix missing profile
+        try {
+          const { error: profileError } = await supabase.from('profiles').upsert({
+            id: user.id,
+            email: user.email,
+            full_name: user.user_metadata.full_name,
+            avatar_url: user.user_metadata.avatar_url
+          });
+          
+          if (!profileError) {
+            setError('Your user profile was missing. We fixed it! Please click "Create Market Suggestion" again.');
+          } else {
+            setError('User profile missing. Please run the FIX_PROFILES.sql script in Supabase.');
+          }
+        } catch (e) {
+           setError('User profile missing. Please run the FIX_PROFILES.sql script in Supabase.');
+        }
       } else {
         setError(err.message || 'Failed to create market');
       }

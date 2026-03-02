@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { MarketIdea } from '@/types/database';
@@ -12,6 +13,7 @@ type SortPeriod = 'day' | 'week' | 'month' | 'all';
 
 export default function Home() {
   const { user, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
   const [markets, setMarkets] = useState<MarketIdea[]>([]);
   const [loading, setLoading] = useState(true);
   const [period, setPeriod] = useState<SortPeriod>('day');
